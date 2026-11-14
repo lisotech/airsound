@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,14 +15,15 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#fdf4f8',
-                            100: '#fce7f3',
-                            500: '#ec4899',
-                            600: '#db2777',
-                            700: '#be185d',
-                            900: '#831843',
-                            dark: '#0f051d',
-                            card: '#1a0b2e'
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            900: '#111827',
+                            dark: '#f4f5f7',
+                            darkgrey: '#1f2937',
+                            carddark: '#111827'
                         }
                     }
                 }
@@ -36,27 +37,28 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0f051d; }
-        ::-webkit-scrollbar-thumb { background: #3b1863; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ec4899; }
-        .glass-panel { background: rgba(26, 11, 46, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(236, 72, 153, 0.15); }
+        ::-webkit-scrollbar-track { background: #1f2937; }
+        ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ea580c; }
+        .glass-panel { background: rgba(31, 41, 55, 0.95); backdrop-filter: blur(16px); border: 1px solid rgba(249, 115, 22, 0.2); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
+        .light-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(16px); border: 1px solid rgba(229, 231, 235, 1); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
         .vinyl-spin { animation: spin 4s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-brand-dark text-gray-100 min-h-screen flex flex-col">
+<body class="bg-[#f4f5f7] text-gray-900 min-h-screen flex flex-col">
 
     <!-- Top Navigation Bar -->
-    <header class="glass-panel sticky top-0 z-40 px-4 lg:px-8 py-3 flex items-center justify-between border-b border-purple-900/40">
+    <header class="light-panel sticky top-0 z-40 px-4 lg:px-8 py-3 flex items-center justify-between border-b border-gray-200">
         <!-- Brand Logo & Title -->
         <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-600 to-purple-600 flex items-center justify-center shadow-lg shadow-pink-600/30 overflow-hidden border border-pink-400/30">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-600 to-black flex items-center justify-center shadow-lg shadow-orange-600/20 overflow-hidden border border-orange-500/30">
                 <img src="a1.png" alt="AirSound Logo" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                 <span class="text-white font-black text-xl hidden"><i class="fa-solid fa-waveform"></i></span>
             </div>
             <div>
-                <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-white via-pink-200 to-pink-400 bg-clip-text text-transparent">AirSound</span>
-                <span class="text-xs block font-semibold text-pink-400 tracking-widest uppercase">Music</span>
+                <span class="text-xl font-extrabold tracking-tight text-gray-900">AirSound</span>
+                <span class="text-xs block font-semibold text-orange-600 tracking-widest uppercase">Music</span>
             </div>
         </div>
 
@@ -67,13 +69,13 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
                 <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search tracks, artists, genres..." 
-                    class="w-full pl-10 pr-4 py-2 bg-purple-950/50 border border-purple-800/40 rounded-full text-sm text-gray-200 placeholder-gray-400 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition">
+                    class="w-full pl-10 pr-4 py-2 bg-gray-100 border border-gray-300 rounded-full text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition">
             </div>
         </div>
 
         <!-- Action Buttons -->
         <div class="flex items-center space-x-3">
-            <button onclick="openUploadModal()" class="flex items-center space-x-2 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-semibold px-4 py-2 rounded-full text-sm shadow-lg shadow-pink-600/25 transition transform active:scale-95">
+            <button onclick="openUploadModal()" class="flex items-center space-x-2 bg-gradient-to-r from-orange-600 to-black hover:from-orange-500 hover:to-gray-900 text-white font-semibold px-4 py-2 rounded-full text-sm shadow-lg shadow-orange-600/20 transition transform active:scale-95">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
                 <span class="hidden sm:inline">Upload Track</span>
             </button>
@@ -84,24 +86,24 @@
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-8">
 
         <!-- Hero Section -->
-        <section class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-purple-900/80 via-brand-card to-pink-950/70 border border-pink-500/20 p-6 md:p-10 shadow-2xl">
-            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-pink-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <section class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-gray-900 via-gray-800 to-black text-white border border-gray-800 p-6 md:p-10 shadow-2xl">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-orange-600/20 rounded-full blur-3xl pointer-events-none"></div>
             <div class="relative z-10 max-w-2xl space-y-4">
-                <span class="inline-flex items-center space-x-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-pink-500/10 text-pink-400 border border-pink-500/20">
+                <span class="inline-flex items-center space-x-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-orange-500/20 text-orange-400 border border-orange-500/30">
                     <i class="fa-solid fa-bolt text-[10px]"></i>
                     <span>Next-Gen Independent Music Marketplace</span>
                 </span>
                 <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-tight text-white">
-                    Discover, Buy & Sell <span class="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">Original Music</span>
+                    Discover, Buy & Sell <span class="bg-gradient-to-r from-orange-400 to-orange-200 bg-clip-text text-transparent">Original Music</span>
                 </h1>
                 <p class="text-gray-300 text-sm md:text-base leading-relaxed">
                     Connect directly with creators worldwide. Stream previews, purchase high-quality tracks instantly, or upload your own masterpieces to start earning.
                 </p>
                 <div class="flex flex-wrap gap-3 pt-2">
-                    <button onclick="document.getElementById('tracksGrid').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-bold text-sm shadow-lg shadow-pink-600/30 transition">
+                    <button onclick="document.getElementById('tracksGrid').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-sm shadow-lg shadow-orange-600/30 transition">
                         Browse Catalog
                     </button>
-                    <button onclick="openUploadModal()" class="px-6 py-3 rounded-xl bg-purple-900/60 hover:bg-purple-800/80 text-purple-200 border border-purple-700/50 font-bold text-sm transition">
+                    <button onclick="openUploadModal()" class="px-6 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 font-bold text-sm transition">
                         Sell Your Music
                     </button>
                 </div>
@@ -109,22 +111,22 @@
         </section>
 
         <!-- Filters & Section Title -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-purple-900/40 pb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-300 pb-4">
             <div>
-                <h2 class="text-xl md:text-2xl font-bold text-white flex items-center space-x-2">
-                    <i class="fa-solid fa-fire text-pink-500"></i>
+                <h2 class="text-xl md:text-2xl font-bold text-gray-900 flex items-center space-x-2">
+                    <i class="fa-solid fa-fire text-orange-600"></i>
                     <span>Featured Tracks</span>
                 </h2>
-                <p class="text-xs text-gray-400">Fresh releases ready for instant purchase and download</p>
+                <p class="text-xs text-gray-500">Fresh releases ready for instant purchase and download</p>
             </div>
             <!-- Genre Filter Pills -->
             <div id="genreFilters" class="flex items-center space-x-2 overflow-x-auto pb-2 sm:pb-0">
-                <button onclick="filterGenre('All')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-pink-600 text-white shadow-sm transition whitespace-nowrap">All Genres</button>
-                <button onclick="filterGenre('Afrobeat')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-950/60 hover:bg-purple-900 text-gray-300 border border-purple-800/40 transition whitespace-nowrap">Afrobeat</button>
-                <button onclick="filterGenre('Hip Hop')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-950/60 hover:bg-purple-900 text-gray-300 border border-purple-800/40 transition whitespace-nowrap">Hip Hop</button>
-                <button onclick="filterGenre('R&B')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-950/60 hover:bg-purple-900 text-gray-300 border border-purple-800/40 transition whitespace-nowrap">R&B</button>
-                <button onclick="filterGenre('Gospel')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-950/60 hover:bg-purple-900 text-gray-300 border border-purple-800/40 transition whitespace-nowrap">Gospel</button>
-                <button onclick="filterGenre('Dancehall')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-950/60 hover:bg-purple-900 text-gray-300 border border-purple-800/40 transition whitespace-nowrap">Dancehall</button>
+                <button onclick="filterGenre('All')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-orange-600 text-white shadow-sm transition whitespace-nowrap">All Genres</button>
+                <button onclick="filterGenre('Afrobeat')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Afrobeat</button>
+                <button onclick="filterGenre('Hip Hop')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Hip Hop</button>
+                <button onclick="filterGenre('R&B')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">R&B</button>
+                <button onclick="filterGenre('Gospel')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Gospel</button>
+                <button onclick="filterGenre('Dancehall')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Dancehall</button>
             </div>
         </div>
 
@@ -136,15 +138,15 @@
     </main>
 
     <!-- Persistent Audio Player Bar -->
-    <div id="audioPlayerBar" class="fixed bottom-0 left-0 right-0 glass-panel border-t border-purple-800/50 bg-brand-card/95 backdrop-blur-xl z-50 px-4 py-3 shadow-2xl hidden">
+    <div id="audioPlayerBar" class="fixed bottom-0 left-0 right-0 glass-panel border-t border-gray-700 bg-gray-900 text-white backdrop-blur-xl z-50 px-4 py-3 shadow-2xl hidden">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             
             <!-- Track Info -->
             <div class="flex items-center space-x-3 w-full md:w-1/4">
-                <div class="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-purple-900/50 border border-purple-700/40">
+                <div class="relative w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-gray-800 border border-gray-700">
                     <img id="playerCover" src="" alt="Cover" class="w-full h-full object-cover">
-                    <div id="playerVinylOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center hidden">
-                        <i class="fa-solid fa-compact-disc text-pink-400 vinyl-spin"></i>
+                    <div id="playerVinylOverlay" class="absolute inset-0 bg-black/60 flex items-center justify-center hidden">
+                        <i class="fa-solid fa-compact-disc text-orange-400 vinyl-spin"></i>
                     </div>
                 </div>
                 <div class="min-w-0 flex-1">
@@ -158,7 +160,7 @@
                 <div class="flex items-center space-x-6">
                     <button class="text-gray-400 hover:text-white transition text-sm"><i class="fa-solid fa-shuffle"></i></button>
                     <button class="text-gray-300 hover:text-white transition text-base"><i class="fa-solid fa-backward-step"></i></button>
-                    <button onclick="togglePlayPause()" id="playPauseBtn" class="w-10 h-10 rounded-full bg-pink-600 hover:bg-pink-500 text-white flex items-center justify-center shadow-lg shadow-pink-600/30 transition transform active:scale-95">
+                    <button onclick="togglePlayPause()" id="playPauseBtn" class="w-10 h-10 rounded-full bg-orange-600 hover:bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-orange-600/30 transition transform active:scale-95">
                         <i id="playPauseIcon" class="fa-solid fa-play text-sm"></i>
                     </button>
                     <button class="text-gray-300 hover:text-white transition text-base"><i class="fa-solid fa-forward-step"></i></button>
@@ -166,8 +168,8 @@
                 </div>
                 <div class="flex items-center space-x-3 w-full max-w-md text-xs text-gray-400">
                     <span id="currentTime">0:00</span>
-                    <div class="flex-1 bg-purple-950/80 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="seekAudio(event)">
-                        <div id="progressBar" class="bg-gradient-to-r from-pink-500 to-purple-500 h-full w-0 transition-all"></div>
+                    <div class="flex-1 bg-gray-800 h-1.5 rounded-full overflow-hidden cursor-pointer" onclick="seekAudio(event)">
+                        <div id="progressBar" class="bg-gradient-to-r from-orange-500 to-orange-400 h-full w-0 transition-all"></div>
                     </div>
                     <span id="durationTime">0:00</span>
                 </div>
@@ -177,7 +179,7 @@
             <div class="hidden md:flex items-center justify-end space-x-4 w-1/4">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-volume-high text-gray-400 text-xs"></i>
-                    <input type="range" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" class="w-20 accent-pink-500 cursor-pointer h-1 bg-purple-950 rounded-lg">
+                    <input type="range" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)" class="w-20 accent-orange-500 cursor-pointer h-1 bg-gray-800 rounded-lg">
                 </div>
                 <button onclick="closePlayer()" class="text-gray-400 hover:text-gray-200 p-1.5"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -186,36 +188,36 @@
     </div>
 
     <!-- Upload Track Modal -->
-    <div id="uploadModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="glass-panel w-full max-w-lg rounded-3xl p-6 md:p-8 space-y-6 border border-pink-500/30 shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <div class="flex items-center justify-between border-b border-purple-900/60 pb-4">
+    <div id="uploadModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white text-gray-900 w-full max-w-lg rounded-3xl p-6 md:p-8 space-y-6 border border-gray-200 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-4">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center border border-pink-500/30">
+                    <div class="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center border border-orange-200">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                     </div>
                     <div>
-                        <h3 class="text-lg font-bold text-white">Upload Your Track</h3>
-                        <p class="text-xs text-gray-400">Share your music with the AirSound community</p>
+                        <h3 class="text-lg font-bold text-gray-900">Upload Your Track</h3>
+                        <p class="text-xs text-gray-500">Share your music with the AirSound community</p>
                     </div>
                 </div>
-                <button onclick="closeUploadModal()" class="text-gray-400 hover:text-white p-2 rounded-lg hover:bg-purple-900/40 transition">
+                <button onclick="closeUploadModal()" class="text-gray-400 hover:text-gray-700 p-2 rounded-lg hover:bg-gray-100 transition">
                     <i class="fa-solid fa-xmark text-lg"></i>
                 </button>
             </div>
 
             <form id="uploadForm" onsubmit="handleTrackUpload(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Track Title</label>
-                    <input type="text" id="upTitle" required placeholder="e.g. Lusaka Sunset" class="w-full bg-purple-950/60 border border-purple-800/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500">
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Track Title</label>
+                    <input type="text" id="upTitle" required placeholder="e.g. Lusaka Sunset" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Artist / Producer Name</label>
-                    <input type="text" id="upArtist" required placeholder="e.g. DJ Kalu" class="w-full bg-purple-950/60 border border-purple-800/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500">
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Artist / Producer Name</label>
+                    <input type="text" id="upArtist" required placeholder="e.g. DJ Kalu" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500">
                 </div>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Genre</label>
-                        <select id="upGenre" class="w-full bg-purple-950/60 border border-purple-800/50 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-pink-500">
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Genre</label>
+                        <select id="upGenre" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 focus:outline-none focus:border-orange-500">
                             <option value="Afrobeat">Afrobeat</option>
                             <option value="Hip Hop">Hip Hop</option>
                             <option value="R&B">R&B</option>
@@ -224,22 +226,22 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Price (ZMW)</label>
-                        <input type="number" id="upPrice" required min="1" step="0.5" placeholder="50" class="w-full bg-purple-950/60 border border-purple-800/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500">
+                        <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Price (ZMW)</label>
+                        <input type="number" id="upPrice" required min="1" step="0.5" placeholder="50" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Cover Art Image URL</label>
-                    <input type="url" id="upCover" placeholder="https://images.unsplash.com/photo-..." class="w-full bg-purple-950/60 border border-purple-800/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500">
-                    <p class="text-[10px] text-gray-400 mt-1">Leave empty for a stunning auto-generated cover.</p>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Cover Art Image URL</label>
+                    <input type="url" id="upCover" placeholder="https://images.unsplash.com/photo-..." class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500">
+                    <p class="text-[10px] text-gray-500 mt-1">Leave empty for a stunning auto-generated cover.</p>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Audio File URL (MP3/WAV)</label>
-                    <input type="url" id="upAudio" required placeholder="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" class="w-full bg-purple-950/60 border border-purple-800/50 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pink-500">
-                    <p class="text-[10px] text-gray-400 mt-1">Provide a direct streaming audio URL for instant playback.</p>
+                    <label class="block text-xs font-semibold text-gray-700 uppercase mb-1">Audio File URL (MP3/WAV)</label>
+                    <input type="url" id="upAudio" required placeholder="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" class="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-orange-500">
+                    <p class="text-[10px] text-gray-500 mt-1">Provide a direct streaming audio URL for instant playback.</p>
                 </div>
                 <div class="pt-2">
-                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 text-white font-bold text-sm shadow-lg shadow-pink-600/30 transition">
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-orange-600 to-black hover:from-orange-500 hover:to-gray-900 text-white font-bold text-sm shadow-lg shadow-orange-600/30 transition">
                         Publish Track to Marketplace
                     </button>
                 </div>
@@ -248,102 +250,100 @@
     </div>
 
     <!-- Purchase Confirmation Modal -->
-    <div id="purchaseModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="glass-panel w-full max-w-md rounded-3xl p-6 md:p-8 space-y-6 border border-pink-500/30 shadow-2xl text-center">
-            <div class="w-16 h-16 bg-pink-600/20 text-pink-400 rounded-full flex items-center justify-center mx-auto border border-pink-500/40 text-2xl">
+    <div id="purchaseModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white text-gray-900 w-full max-w-md rounded-3xl p-6 md:p-8 space-y-6 border border-gray-200 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center mx-auto border border-orange-200 text-2xl">
                 <i class="fa-solid fa-cart-shopping"></i>
             </div>
             <div class="space-y-2">
-                <h3 id="modalTrackTitle" class="text-xl font-bold text-white">Track Name</h3>
-                <p id="modalTrackArtist" class="text-sm text-gray-400">By Artist</p>
-                <div class="text-2xl font-black text-pink-400 pt-2" id="modalTrackPrice">K50.00</div>
+                <h3 id="modalTrackTitle" class="text-xl font-bold text-gray-900">Track Name</h3>
+                <p id="modalTrackArtist" class="text-sm text-gray-500">By Artist</p>
+                <div class="text-2xl font-black text-orange-600 pt-2" id="modalTrackPrice">K50.00</div>
             </div>
             <div class="space-y-3 pt-2">
                 <button onclick="confirmPurchase()" class="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition">
                     <i class="fa-solid fa-shield-check mr-2"></i> Pay & Download Instantly
                 </button>
-                <button onclick="closePurchaseModal()" class="w-full py-2.5 rounded-xl bg-purple-950/60 hover:bg-purple-900 text-gray-300 text-sm font-semibold transition">
+                <button onclick="closePurchaseModal()" class="w-full py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold transition">
                     Cancel
                 </button>
             </div>
         </div>
     </div>
 
-     <div style="text-align: center; padding: 10px 0; background: #07192f; color: white;">
-    <strong>AirSound Music</strong>
+    <div style="text-align: center; padding: 12px 0; background: #111827; color: white;">
+        <strong>AirSound Music</strong>
     </div>
 
-    <footer style="background:#0b2545; color:white; padding:8px 10px; text-align:center;">
+    <footer style="background:#1f2937; color:white; padding:12px 10px; text-align:center;">
+        <!-- Colored Box Social Layout with Vector Emblems inside -->
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom: 8px;">
+          
+          <!-- Facebook Layout: Blue Background -->
+          <a href="https://www.facebook.com/lisotechinnovations" target="_blank" style="
+                width:95px;
+                height:32px;
+                background-color: #1877F2;
+                border-radius:4px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                gap: 6px;
+                color:white;
+                font-size:11px;
+                font-weight:600;
+                text-decoration:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            Facebook
+          </a>
 
-    <!-- Colored Box Social Layout with Vector Emblems inside -->
-    <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom: 5px;">
-      
-      <!-- Facebook Layout: Blue Background -->
-      <a href="https://www.facebook.com/lisotechinnovations" target="_blank" style="
-            width:95px;
-            height:32px;
-            background-color: #1877F2;
-            border-radius:4px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap: 6px;
-            color:white;
-            font-size:11px;
-            font-weight:600;
-            text-decoration:none;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Facebook
-      </a>
+          <!-- Instagram Layout: Brand Gradient Background -->
+          <a href="https://www.instagram.com/lisotechinnovations" target="_blank" style="
+                width:95px;
+                height:32px;
+                background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+                border-radius:4px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                gap: 6px;
+                color:white;
+                font-size:11px;
+                font-weight:600;
+                text-decoration:none;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            Instagram
+          </a>
 
-      <!-- Instagram Layout: Brand Gradient Background -->
-      <a href="https://www.instagram.com/lisotechinnovations" target="_blank" style="
-            width:95px;
-            height:32px;
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            border-radius:4px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap: 6px;
-            color:white;
-            font-size:11px;
-            font-weight:600;
-            text-decoration:none;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        Instagram
-      </a>
-
-      <!-- WhatsApp Layout: Dark Green Background with Official Logo -->
-      <a href="https://wa.me/message/NEGCGNOZ4BOHP1" target="_blank" style="
-            width:95px;
-            height:32px;
-            background-color: #128C7E;
-            border-radius:4px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            gap: 6px;
-            color:white;
-            font-size:11px;
-            font-weight:600;
-            text-decoration:none;">
-        <svg width="13" height="13" viewBox="0 0 448 512" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.6 66.4 14 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-        WhatsApp
-      </a>
-
-    </div>
-    
-    <div>
-      <p style="margin:2px 0; font-size:12px; opacity:0.95;">
-        © AirSound Music || All Rights Reserved.
-      </p>
-    </div>
-    
-    <div style="margin-top: 2px;">
-      <marquee style="font-size:11px; max-width: 450px; margin: 0 auto; display: block;">Designed @Lisotech Innovations. call or whatsapp +260974101130</marquee>
-    </div>
-  </footer>
+          <!-- WhatsApp Layout: Dark Green Background with Official Logo -->
+          <a href="https://wa.me/message/NEGCGNOZ4BOHP1" target="_blank" style="
+                width:95px;
+                height:32px;
+                background-color: #128C7E;
+                border-radius:4px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                gap: 6px;
+                color:white;
+                font-size:11px;
+                font-weight:600;
+                text-decoration:none;">
+            <svg width="13" height="13" viewBox="0 0 448 512" fill="white"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.6 66.4 14 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+        
+        <div>
+          <p style="margin:2px 0; font-size:12px; opacity:0.95;">
+            © AirSound Music || All Rights Reserved.
+          </p>
+        </div>
+        
+        <div style="margin-top: 4px;">
+          <marquee style="font-size:11px; max-width: 450px; margin: 0 auto; display: block;">Designed @Lisotech Innovations. call or whatsapp +260974101130</marquee>
+        </div>
+    </footer>
     
     <!-- Application Script -->
     <script>
@@ -447,8 +447,8 @@
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full py-16 text-center space-y-3">
-                        <i class="fa-solid fa-music text-4xl text-pink-500/40"></i>
-                        <p class="text-gray-400 text-sm">No tracks found matching your criteria.</p>
+                        <i class="fa-solid fa-music text-4xl text-gray-400"></i>
+                        <p class="text-gray-500 text-sm">No tracks found matching your criteria.</p>
                     </div>
                 `;
                 return;
@@ -456,26 +456,26 @@
 
             filtered.forEach(track => {
                 const card = document.createElement('div');
-                card.className = `glass-panel rounded-2xl overflow-hidden group hover:border-pink-500/40 transition-all duration-300 flex flex-col`;
+                card.className = `bg-white border border-gray-200 rounded-2xl overflow-hidden group hover:border-orange-500/50 hover:shadow-lg transition-all duration-300 flex flex-col`;
                 card.innerHTML = `
-                    <div class="relative aspect-square overflow-hidden bg-purple-950">
+                    <div class="relative aspect-square overflow-hidden bg-gray-100">
                         <img src="${track.cover}" alt="${track.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition"></div>
-                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-purple-900/80 backdrop-blur-md text-pink-300 border border-purple-700/40">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-70 transition"></div>
+                        <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold bg-white/90 backdrop-blur-md text-orange-600 border border-gray-200 shadow-sm">
                             ${track.genre}
                         </span>
-                        <button onclick="playTrack(${track.id})" class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-pink-600 hover:bg-pink-500 text-white flex items-center justify-center shadow-lg shadow-pink-600/40 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-300">
+                        <button onclick="playTrack(${track.id})" class="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-orange-600 hover:bg-orange-500 text-white flex items-center justify-center shadow-lg shadow-orange-600/30 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-300">
                             <i class="fa-solid ${activeTrackId === track.id && isPlaying ? 'fa-pause' : 'fa-play'} text-sm"></i>
                         </button>
                     </div>
                     <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
                         <div>
-                            <h3 class="font-bold text-white text-base truncate" title="${track.title}">${track.title}</h3>
-                            <p class="text-xs text-gray-400 truncate">${track.artist}</p>
+                            <h3 class="font-bold text-gray-900 text-base truncate" title="${track.title}">${track.title}</h3>
+                            <p class="text-xs text-gray-500 truncate">${track.artist}</p>
                         </div>
-                        <div class="flex items-center justify-between pt-2 border-t border-purple-900/50">
-                            <span class="font-extrabold text-pink-400 text-sm">K${Number(track.price).toFixed(2)}</span>
-                            <button onclick="openPurchaseModal(${track.id})" class="px-3 py-1.5 rounded-lg bg-pink-600/20 hover:bg-pink-600 text-pink-300 hover:text-white text-xs font-semibold border border-pink-500/30 transition">
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-100">
+                            <span class="font-extrabold text-orange-600 text-sm">K${Number(track.price).toFixed(2)}</span>
+                            <button onclick="openPurchaseModal(${track.id})" class="px-3 py-1.5 rounded-lg bg-orange-50 hover:bg-orange-600 text-orange-600 hover:text-white text-xs font-semibold border border-orange-200 transition">
                                 <i class="fa-solid fa-cart-shopping mr-1"></i> Buy
                             </button>
                         </div>
@@ -490,9 +490,9 @@
             currentGenre = genre;
             document.querySelectorAll('.genre-btn').forEach(btn => {
                 if (btn.textContent.includes(genre)) {
-                    btn.className = "genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-pink-600 text-white shadow-sm transition whitespace-nowrap";
+                    btn.className = "genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-orange-600 text-white shadow-sm transition whitespace-nowrap";
                 } else {
-                    btn.className = "genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-purple-950/60 hover:bg-purple-900 text-gray-300 border border-purple-800/40 transition whitespace-nowrap";
+                    btn.className = "genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap";
                 }
             });
             renderTracks();
@@ -658,7 +658,6 @@
         }
 
         function switchView(view) {
-            // Placeholder helper for navigation
             currentGenre = 'All';
             searchQuery = '';
             document.getElementById('searchInput').value = '';
