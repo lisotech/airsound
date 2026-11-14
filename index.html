@@ -62,7 +62,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
             
             <!-- Brand Logo -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="setActiveTab('explore')">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
                 <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-600 via-violetAccent to-emeraldAccent flex items-center justify-center shadow-lg shadow-indigo-500/20">
                     <i class="fa-solid fa-waveform text-white text-xl"></i>
                 </div>
@@ -104,24 +104,6 @@
     <!-- Main Container -->
     <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
 
-        <!-- Navigation Tabs Bar -->
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-            <div class="flex space-x-2 sm:space-x-4 overflow-x-auto no-scrollbar">
-                <button onclick="setActiveTab('explore')" id="tabExploreBtn" class="px-4 py-2 rounded-xl text-sm font-semibold transition bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 whitespace-nowrap">
-                    <i class="fa-solid fa-compass mr-2"></i>Explore Marketplace
-                </button>
-                <button onclick="setActiveTab('charts')" id="tabChartsBtn" class="px-4 py-2 rounded-xl text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-900 whitespace-nowrap">
-                    <i class="fa-solid fa-chart-line mr-2"></i>Top Charts
-                </button>
-            </div>
-
-            <!-- Currency Toggle -->
-            <div class="flex items-center space-x-2 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
-                <button onclick="setCurrency('ZMW')" id="currZMW" class="px-2.5 py-1 rounded-lg font-bold bg-brand-600 text-white transition">ZMW (K)</button>
-                <button onclick="setCurrency('USD')" id="currUSD" class="px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white transition">USD ($)</button>
-            </div>
-        </div>
-
         <!-- Hero Banner -->
         <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-indigo-950 via-slate-900 to-purple-950 border border-slate-800 p-8 sm:p-12 shadow-2xl">
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none animate-glow"></div>
@@ -136,7 +118,7 @@
                     Discover, Buy & Sell Independent Music Online.
                 </h1>
                 <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
-                    Connect directly with top independent beatmakers and artists. Instant secure checkout with instant high-quality WAV downloads.
+                    Connect directly with top independent beatmakers and artists. Instant secure checkout with high-quality WAV downloads.
                 </p>
                 <div class="flex flex-wrap gap-3 pt-2">
                     <button onclick="filterGenre('All')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold rounded-xl shadow transition">All Genres</button>
@@ -210,7 +192,7 @@
                 <div>
                     <button onclick="buyCurrentTrack()" id="playerBuyBtn" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl shadow transition flex items-center space-x-1.5">
                         <i class="fa-solid fa-bolt"></i>
-                        <span id="playerPriceLabel">Buy K150.00</span>
+                        <span id="playerPriceLabel">Buy $15.00</span>
                     </button>
                 </div>
             </div>
@@ -234,13 +216,13 @@
             <form id="uploadForm" onsubmit="handleUploadSubmit(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-1">Track or Beat Title</label>
-                    <input type="text" id="upTitle" required placeholder="e.g., Lusaka Sunset Vibe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                    <input type="text" id="upTitle" required placeholder="e.g., Neon Sunset Vibe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1">Artist / Producer Name</label>
-                        <input type="text" id="upArtist" required placeholder="e.g., DJ Kasi" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <input type="text" id="upArtist" required placeholder="e.g., DJ Nova" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1">Genre</label>
@@ -256,8 +238,8 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Price (ZMW)</label>
-                        <input type="number" id="upPriceZMW" required min="0" step="5" value="150" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Price (USD)</label>
+                        <input type="number" id="upPriceUSD" required min="1" step="1" value="15" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-indigo-500">
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-300 mb-1">BPM (Tempo)</label>
@@ -293,15 +275,13 @@
 
     <!-- JAVASCRIPT APPLICATION LOGIC -->
     <script>
-        const USD_TO_ZMW = 28.5;
-
         const defaultTracks = [
             {
                 id: 'track-1',
-                title: 'Lusaka Sunset Vibe',
-                artist: 'DJ Kasi Beats',
+                title: 'Neon Sunset Vibe',
+                artist: 'DJ Nova Beats',
                 genre: 'Afrobeat',
-                priceZMW: 180,
+                priceUSD: 15.00,
                 bpm: 112,
                 cover: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=500&q=80',
                 likes: 342,
@@ -309,10 +289,10 @@
             },
             {
                 id: 'track-2',
-                title: 'Copperbelt Bounce',
+                title: 'Cybernetic Bounce',
                 artist: 'Producer Shaba',
                 genre: 'Amapiano',
-                priceZMW: 200,
+                priceUSD: 20.00,
                 bpm: 114,
                 cover: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=500&q=80',
                 likes: 512,
@@ -320,10 +300,10 @@
             },
             {
                 id: 'track-3',
-                title: 'Zambezi Midnight Trap',
+                title: 'Midnight Synth Trap',
                 artist: 'Njelele X',
                 genre: 'Trap',
-                priceZMW: 150,
+                priceUSD: 12.00,
                 bpm: 140,
                 cover: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=500&q=80',
                 likes: 289,
@@ -331,10 +311,10 @@
             },
             {
                 id: 'track-4',
-                title: 'Victoria Falls Groove',
-                artist: 'AfroSoul Zambia',
+                title: 'Ethereal Groove',
+                artist: 'AfroSoul Studios',
                 genre: 'Afrobeat',
-                priceZMW: 220,
+                priceUSD: 25.00,
                 bpm: 108,
                 cover: 'https://images.unsplash.com/photo-1511252174215-9aec9fc51bf1?auto=format&fit=crop&w=500&q=80',
                 likes: 410,
@@ -342,10 +322,10 @@
             },
             {
                 id: 'track-5',
-                title: 'Kabwe Heavy Bass',
+                title: 'Heavy Bassline District',
                 artist: 'BeatSmith Pro',
                 genre: 'Dancehall',
-                priceZMW: 130,
+                priceUSD: 10.00,
                 bpm: 100,
                 cover: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=500&q=80',
                 likes: 195,
@@ -353,10 +333,10 @@
             },
             {
                 id: 'track-6',
-                title: 'Savannah Soulmate',
+                title: 'Urban Soulmate',
                 artist: 'Lunga Melodies',
                 genre: 'R&B',
-                priceZMW: 170,
+                priceUSD: 18.00,
                 bpm: 92,
                 cover: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=500&q=80',
                 likes: 312,
@@ -365,11 +345,9 @@
         ];
 
         let tracks = JSON.parse(localStorage.getItem('airsound_tracks')) || defaultTracks;
-        let currentCurrency = localStorage.getItem('airsound_currency') || 'ZMW';
         let currentFilter = 'All';
         let searchQuery = '';
         let currentSort = 'popular';
-        let activeTab = 'explore';
 
         let currentPlayingTrackId = null;
         let isPlaying = false;
@@ -378,49 +356,10 @@
 
         window.onload = function() {
             renderTracks();
-            setCurrency(currentCurrency);
-            setActiveTab('explore');
         };
 
-        function formatPrice(priceInZMW) {
-            if (currentCurrency === 'USD') {
-                return `$${(priceInZMW / USD_TO_ZMW).toFixed(2)}`;
-            }
-            return `K${priceInZMW.toFixed(2)}`;
-        }
-
-        function setCurrency(curr) {
-            currentCurrency = curr;
-            localStorage.setItem('airsound_currency', curr);
-            if(curr === 'ZMW') {
-                document.getElementById('currZMW').className = 'px-2.5 py-1 rounded-lg font-bold bg-brand-600 text-white transition';
-                document.getElementById('currUSD').className = 'px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white transition';
-            } else {
-                document.getElementById('currUSD').className = 'px-2.5 py-1 rounded-lg font-bold bg-brand-600 text-white transition';
-                document.getElementById('currZMW').className = 'px-2.5 py-1 rounded-lg font-medium text-slate-400 hover:text-white transition';
-            }
-            renderTracks();
-            if(currentPlayingTrackId) {
-                const t = tracks.find(tr => tr.id === currentPlayingTrackId);
-                if(t) document.getElementById('playerPriceLabel').innerText = `Buy ${formatPrice(t.priceZMW)}`;
-            }
-        }
-
-        function setActiveTab(tab) {
-            activeTab = tab;
-            const btnExplore = document.getElementById('tabExploreBtn');
-            const btnCharts = document.getElementById('tabChartsBtn');
-
-            if(tab === 'explore') {
-                btnExplore.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 whitespace-nowrap';
-                btnCharts.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-900 whitespace-nowrap';
-                document.getElementById('sectionTitle').innerText = 'Trending Beats & Tracks';
-            } else {
-                btnCharts.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition bg-indigo-600 text-white shadow-lg shadow-indigo-600/20 whitespace-nowrap';
-                btnExplore.className = 'px-4 py-2 rounded-xl text-sm font-semibold transition text-slate-400 hover:text-white hover:bg-slate-900 whitespace-nowrap';
-                document.getElementById('sectionTitle').innerText = 'AirSound Top Charts (Most Streamed)';
-            }
-            renderTracks();
+        function formatPrice(priceInUSD) {
+            return `$${priceInUSD.toFixed(2)}`;
         }
 
         function filterGenre(genre) {
@@ -446,16 +385,14 @@
                 return matchGenre && matchSearch;
             });
 
-            if(activeTab === 'charts') {
-                filtered.sort((a,b) => b.likes - a.likes);
-            } else if(currentSort === 'popular') {
+            if(currentSort === 'popular') {
                 filtered.sort((a,b) => b.likes - a.likes);
             } else if(currentSort === 'newest') {
                 filtered.reverse();
             } else if(currentSort === 'price-low') {
-                filtered.sort((a,b) => a.priceZMW - b.priceZMW);
+                filtered.sort((a,b) => a.priceUSD - b.priceUSD);
             } else if(currentSort === 'price-high') {
-                filtered.sort((a,b) => b.priceZMW - a.priceZMW);
+                filtered.sort((a,b) => b.priceUSD - a.priceUSD);
             }
 
             if(filtered.length === 0) {
@@ -493,7 +430,7 @@
                         <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
                             <div>
                                 <span class="text-[10px] text-slate-400 block">License Price</span>
-                                <span class="text-sm font-extrabold text-emerald-400">${formatPrice(t.priceZMW)}</span>
+                                <span class="text-sm font-extrabold text-emerald-400">${formatPrice(t.priceUSD)}</span>
                             </div>
                             <button onclick="buyTrackDirect('${t.id}')" class="px-3.5 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold rounded-xl shadow transition flex items-center space-x-1.5">
                                 <i class="fa-solid fa-bolt text-[10px]"></i>
@@ -521,7 +458,7 @@
             document.getElementById('playerCover').src = track.cover;
             document.getElementById('playerTitle').innerText = track.title;
             document.getElementById('playerArtist').innerText = track.artist;
-            document.getElementById('playerPriceLabel').innerText = `Buy ${formatPrice(track.priceZMW)}`;
+            document.getElementById('playerPriceLabel').innerText = `Buy ${formatPrice(track.priceUSD)}`;
             document.getElementById('playPauseIcon').className = 'fa-solid fa-pause';
 
             startProgressSimulation();
@@ -592,13 +529,13 @@
             const title = document.getElementById('upTitle').value;
             const artist = document.getElementById('upArtist').value;
             const genre = document.getElementById('upGenre').value;
-            const priceZMW = parseFloat(document.getElementById('upPriceZMW').value);
+            const priceUSD = parseFloat(document.getElementById('upPriceUSD').value);
             const bpm = parseInt(document.getElementById('upBpm').value);
             const cover = document.getElementById('upCover').value || 'https://placehold.co/400x400/1e1b4b/indigo?text=AirSound';
 
             const newTrack = {
                 id: 'uploaded-' + Date.now(),
-                title, artist, genre, priceZMW, bpm, cover,
+                title, artist, genre, priceUSD, bpm, cover,
                 likes: 1,
                 plays: '12'
             };
