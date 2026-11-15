@@ -73,12 +73,31 @@
             </div>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="flex items-center space-x-3">
-            <button onclick="openUploadModal()" class="flex items-center space-x-2 bg-gradient-to-r from-orange-600 to-black hover:from-orange-500 hover:to-gray-900 text-white font-semibold px-4 py-2 rounded-full text-sm shadow-lg shadow-orange-600/20 transition transform active:scale-95">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <span class="hidden sm:inline">Upload Track</span>
+        <!-- Hamburger Menu Button -->
+        <div class="relative">
+            <button onclick="toggleMenuDropdown(event)" class="w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 flex items-center justify-center border border-gray-300 transition focus:outline-none">
+                <i class="fa-solid fa-bars text-lg"></i>
             </button>
+
+            <!-- Dropdown Menu Popup -->
+            <div id="menuDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-200 py-2 hidden z-50">
+                <button onclick="handleMenuOption('upload')" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-cloud-arrow-up w-5 text-orange-500"></i>
+                    <span>Upload</span>
+                </button>
+                <button onclick="handleMenuOption('contact')" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-phone w-5 text-orange-500"></i>
+                    <span>Contact</span>
+                </button>
+                <button onclick="handleMenuOption('about')" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-circle-info w-5 text-orange-500"></i>
+                    <span>About Us</span>
+                </button>
+                <a href="mailto:upload@airsoundmusic.com" class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 flex items-center space-x-2 transition">
+                    <i class="fa-solid fa-envelope w-5 text-orange-500"></i>
+                    <span>Email</span>
+                </a>
+            </div>
         </div>
     </header>
 
@@ -104,7 +123,7 @@
                         Browse Catalog
                     </button>
                     <button onclick="openUploadModal()" class="px-6 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 font-bold text-sm transition">
-                        Sell Your Music
+                        Upload Now
                     </button>
                 </div>
             </div>
@@ -115,18 +134,11 @@
             <div>
                 <h2 class="text-xl md:text-2xl font-bold text-gray-900 flex items-center space-x-2">
                     <i class="fa-solid fa-fire text-orange-600"></i>
-                    <span>Featured Tracks</span>
+                    <span><strong>Launching Soon</strong></span>
                 </h2>
-                <p class="text-xs text-gray-500">Fresh releases ready for instant purchase and download</p>
             </div>
             <!-- Genre Filter Pills -->
             <div id="genreFilters" class="flex items-center space-x-2 overflow-x-auto pb-2 sm:pb-0">
-                <button onclick="filterGenre('All')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-orange-600 text-white shadow-sm transition whitespace-nowrap">All Genres</button>
-                <button onclick="filterGenre('Afrobeat')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Afrobeat</button>
-                <button onclick="filterGenre('Hip Hop')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Hip Hop</button>
-                <button onclick="filterGenre('R&B')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">R&B</button>
-                <button onclick="filterGenre('Gospel')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Gospel</button>
-                <button onclick="filterGenre('Dancehall')" class="genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap">Dancehall</button>
             </div>
         </div>
 
@@ -249,6 +261,38 @@
         </div>
     </div>
 
+    <!-- About Us Modal -->
+    <div id="aboutModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white text-gray-900 w-full max-w-md rounded-3xl p-6 md:p-8 space-y-4 border border-gray-200 shadow-2xl relative">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+                <h3 class="text-lg font-bold text-gray-900">About Us</h3>
+                <button onclick="closeAboutModal()" class="text-gray-400 hover:text-gray-700 p-2 rounded-lg transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                <strong>AirSound Music</strong> is a next-generation independent music marketplace designed to connect creators and music lovers worldwide. Stream previews, support independent artists, and share your sound effortlessly.
+            </p>
+            <button onclick="closeAboutModal()" class="w-full py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition">Close</button>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white text-gray-900 w-full max-w-md rounded-3xl p-6 md:p-8 space-y-4 border border-gray-200 shadow-2xl relative">
+            <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+                <h3 class="text-lg font-bold text-gray-900">Contact Us</h3>
+                <button onclick="closeContactModal()" class="text-gray-400 hover:text-gray-700 p-2 rounded-lg transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <p class="text-sm text-gray-600 leading-relaxed">
+                Get in touch with Lisotech Innovations for inquiries, support, or partnerships:
+            </p>
+            <div class="space-y-2 text-sm text-gray-800">
+                <p><i class="fa-solid fa-envelope text-orange-600 mr-2"></i> upload@airsoundmusic.com</p>
+                <p><i class="fa-solid fa-phone text-orange-600 mr-2"></i> +260974101130</p>
+            </div>
+            <button onclick="closeContactModal()" class="w-full py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition">Close</button>
+        </div>
+    </div>
+
     <!-- Purchase Confirmation Modal -->
     <div id="purchaseModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-white text-gray-900 w-full max-w-md rounded-3xl p-6 md:p-8 space-y-6 border border-gray-200 shadow-2xl text-center">
@@ -347,69 +391,8 @@
     
     <!-- Application Script -->
     <script>
-        // Initial Mock Tracks Catalog
-        const defaultTracks = [
-            {
-                id: 1,
-                title: "Lusaka Sunset",
-                artist: "DJ Kalu",
-                genre: "Afrobeat",
-                price: 60,
-                cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                plays: "1.2k"
-            },
-            {
-                id: 2,
-                title: "Zambezi Bounce",
-                artist: "Zed Rhymes",
-                genre: "Hip Hop",
-                price: 45,
-                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                plays: "3.4k"
-            },
-            {
-                id: 3,
-                title: "Grace & Mercy",
-                artist: "Chitalu",
-                genre: "Gospel",
-                price: 50,
-                cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                plays: "890"
-            },
-            {
-                id: 4,
-                title: "Midnight Groove",
-                artist: "Neo Soul",
-                genre: "R&B",
-                price: 75,
-                cover: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&q=80",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-                plays: "2.1k"
-            },
-            {
-                id: 5,
-                title: "Island Riddim",
-                artist: "Bwana Beats",
-                genre: "Dancehall",
-                price: 55,
-                cover: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=600&q=80",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-                plays: "4.5k"
-            },
-            {
-                id: 6,
-                title: "Savanna Vibes",
-                artist: "AfroRoots",
-                genre: "Afrobeat",
-                price: 65,
-                cover: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?auto=format&fit=crop&w=600&q=80",
-                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
-                plays: "1.9k"
-            }
-        ];
+        // Initial Mock Tracks Catalog (Empty as requested)
+        const defaultTracks = [];
 
         // Load tracks from localStorage or initialize defaults
         let tracks = JSON.parse(localStorage.getItem('airsound_tracks')) || defaultTracks;
@@ -429,7 +412,35 @@
                 isPlaying = false;
                 updatePlayPauseUI();
             });
+
+            // Close dropdown when clicking outside
+            window.addEventListener('click', (e) => {
+                const dropdown = document.getElementById('menuDropdown');
+                const target = e.target;
+                if (!target.closest('button[onclick*="toggleMenuDropdown"]') && !dropdown.contains(target)) {
+                    dropdown.classList.add('hidden');
+                }
+            });
         });
+
+        // Toggle Menu Dropdown
+        function toggleMenuDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Handle Menu Options
+        function handleMenuOption(option) {
+            document.getElementById('menuDropdown').classList.add('hidden');
+            if (option === 'upload') {
+                openUploadModal();
+            } else if (option === 'contact') {
+                openContactModal();
+            } else if (option === 'about') {
+                openAboutModal();
+            }
+        }
 
         // Render Tracks Grid
         function renderTracks() {
@@ -447,8 +458,8 @@
             if (filtered.length === 0) {
                 grid.innerHTML = `
                     <div class="col-span-full py-16 text-center space-y-3">
-                        <i class="fa-solid fa-music text-4xl text-gray-400"></i>
-                        <p class="text-gray-500 text-sm">No tracks found matching your criteria.</p>
+                        <i class="fa-solid fa-music text-4xl text-orange-500"></i>
+                        <p class="text-gray-700 font-bold text-base">Launching Soon</p>
                     </div>
                 `;
                 return;
@@ -488,13 +499,6 @@
         // Genre Filter
         function filterGenre(genre) {
             currentGenre = genre;
-            document.querySelectorAll('.genre-btn').forEach(btn => {
-                if (btn.textContent.includes(genre)) {
-                    btn.className = "genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-orange-600 text-white shadow-sm transition whitespace-nowrap";
-                } else {
-                    btn.className = "genre-btn px-3.5 py-1.5 rounded-full text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 border border-gray-300 transition whitespace-nowrap";
-                }
-            });
             renderTracks();
         }
 
@@ -599,6 +603,22 @@
         function closeUploadModal() {
             document.getElementById('uploadModal').classList.add('hidden');
             document.getElementById('uploadForm').reset();
+        }
+
+        // About Modal
+        function openAboutModal() {
+            document.getElementById('aboutModal').classList.remove('hidden');
+        }
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.add('hidden');
+        }
+
+        // Contact Modal
+        function openContactModal() {
+            document.getElementById('contactModal').classList.remove('hidden');
+        }
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.add('hidden');
         }
 
         function handleTrackUpload(e) {
